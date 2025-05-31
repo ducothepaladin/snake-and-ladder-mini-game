@@ -3,6 +3,7 @@ const player = document.getElementById("player-container");
 const computer = document.getElementById("computer-container");
 const dice1 = document.getElementById("dice-1");
 const diceRollBtn = document.getElementById("dice-roll-btn");
+const message = document.getElementById("message");
 
 //data for ladder and snake
 const ladder = [
@@ -39,6 +40,7 @@ const boardHeight = 10 * cellHeight;
 const playerObj = {
   x: 0,
   y: 0,
+  name: "Player",
   width: 90,
   height: 90,
   current_cell: 1,
@@ -53,6 +55,7 @@ const playerObj = {
 const computerObj = {
   x: 0,
   y: 0,
+  name: "Computer",
   width: 90,
   height: 90,
   current_cell: 1,
@@ -96,7 +99,10 @@ async function rollDice() {
 
 //funtion to handle movement on board
 async function objMovement(steps, obj) {
+  message.textContent = `${obj.name} rolled a ${steps}!`;
+
   if (obj.current_cell + steps > 100) {
+    message.textContent = `${obj.name} cannot move, roll exceeds board limit!`
     return Promise.resolve();
   }
 
@@ -160,6 +166,7 @@ async function checkLadderOrSnakeAndMove(obj) {
     obj.x = endCol * cellWidth;
     obj.y = (10 - endRow) * cellHeight;
     obj.current_cell = endCell;
+    message.textContent = `${obj.name} found a magic ladder to cell ${endCell}!`
   }
 
   if (snakeMove && !ladderMove) {
@@ -174,6 +181,7 @@ async function checkLadderOrSnakeAndMove(obj) {
     obj.x = endCol * cellWidth;
     obj.y = (10 - endRow) * cellHeight;
     obj.current_cell = endCell;
+    message.textContent = `Oh no! ${obj.name} was bitten by a snake and slides down to cell ${endCell}!`
   }
 
   if (ladderMove || snakeMove) {
@@ -209,9 +217,9 @@ function createBoard() {
       cell.className = "cell";
       const num = i % 2 === 0 ? count - j : count - 9 + j;
       cell.id = `cell-${num}`;
-      if(j % 2 === 0 && i % 2 === 0) {
+      if (j % 2 === 0 && i % 2 === 0) {
         cell.style.backgroundColor = "#cecece";
-      } else if(j % 2 !== 0 && i % 2 !== 0) {
+      } else if (j % 2 !== 0 && i % 2 !== 0) {
         cell.style.backgroundColor = "#cecece";
       } else {
         cell.style.backgroundColor = "white";

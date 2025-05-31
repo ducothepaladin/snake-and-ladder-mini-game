@@ -68,3 +68,32 @@ body {
 .action-container {
     padding: 20px;
 }
+
+.dice-container, .message-container {
+    padding: 20px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.message-container p {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.dice-container button {
+    width: 100%;
+    padding: 10px;
+}
+
+#dice-1 {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+
